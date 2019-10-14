@@ -1,0 +1,97 @@
+
+<!Doctype HTML>
+<!-- Name: Mike Kaufman
+Date Created: 10/13/19
+Most Recent Revision: 10/13/19
+-->
+<html lang="en">
+	<head>
+
+		<title> Lucky Sevens Game </title>
+			<!-- bootstrap addition/-->
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+				
+			<script>
+        			// function to roll a dice that was used in the course
+        			function rolldice()
+        			{
+            			return Math.floor(Math.random()*6)+1;
+        			}
+       	 
+        			// function that will be the game, starting by declaring all variables
+        			function game(){
+            			var current = 0;
+            			var dice1 = 0;
+            			var dice2 = 0;
+            			var dicetotal= 0;
+            			var rollcounter=0;
+            			var highestroll=0;
+            			var highest=0;
+            			var array1= [0, 0, 0, 0];
+            			// prompt the user to get the starting bet amount
+            			var starting = (Number)(($("#startingAmountBox")).val());
+            			current=starting;
+            			while (current > 0) // while there is money to play with
+            			{
+            			dice1=rolldice();
+            			dice2=rolldice();
+            			dicetotal= dice1+dice2;
+            			// roll both dice and add them together as well as keep track of total rolls needed
+            			rollcounter= rollcounter + 2;
+            			if (dicetotal == "7") // if dice equal 7 then user wins and add 4 to total
+                	{
+                    	current=current+4;
+                	}
+            	else // otherwise, user loses and subtract one from amount
+                	{
+                	current--;
+                	}
+            	if (current>highest)// an if statement to help log the highest amount of money won and what roll count we were on when it was achieved
+                	{
+                	highest=current;
+                	highestroll=rollcounter;
+                	}
+                	dicetotal=0;
+            	}
+            	// enter results into an array for easy display later
+            	array1[0]=starting;
+            	array1[1]=rollcounter;
+            	array1[2]=highest;
+            	array1[3]= highestroll;
+            	// display results in a table
+            	document.write('<table>');
+                document.write('<tr><th>Results</th></tr>');
+                document.write("<tr><td>Starting Amount: " + array1[0] + '</td></tr>');
+                document.write("<tr><td>Total Rolls: " + array1[1] + '</td></tr>');
+                document.write("<tr><td>Highest Amount Won: " + array1[2] + '</td></tr>');
+                document.write("<tr><td>Roll Number of Highest Amount won: " + array1[3] + '</td></tr>');
+            	document.write('</table>');
+            	document.write("<a href=\"luckydev10.html\">Reset</a>");
+
+
+				}
+    	</script>
+	</head>
+	<header>
+	<h1> Luck Sevens Game!</h1>
+	</header>
+	<body>
+		<form method="post" onsubmit="game();">
+		Starting Amount
+		<input type="text" id="startingAmountBox"/>
+		<input type="submit" value="Play" onclick="game();"/>
+		</form>
+	
+		<!-- javascript and jquery for bootstrap /-->
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	
+	
+
+
+	</body>
+	
+</html>
+
